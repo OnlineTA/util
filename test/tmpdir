@@ -8,7 +8,7 @@ dir = tempfile.gettempdir()
 prefix = tempfile.gettempprefix()
 pathprefix = os.path.join(dir, prefix)
 
-child = pexpect.spawn("../src/tmpdir sh")
+child = pexpect.spawn("tmpdir sh")
 child.sendline("pwd")
 child.expect(pathprefix + ".*", timeout = 1)
 child.sendline("exit")
