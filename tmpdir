@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Do something with temporary directory.
+# Do something with a temporary directory.
 #
 # For documentation, try this:
 # $ ./tmpdir --help
