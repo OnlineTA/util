@@ -1,0 +1,35 @@
+#!/usr/bin/env runhaskell
+
+-- Do something for each entry in a directory
+
+import Control.Monad ( void )
+
+import System.Directory ( listDirectory )
+import System.Environment ( getArgs, getProgName )
+import System.Exit ( exitFailure )
+import System.FilePath ( (</>) )
+import System.Process ( createProcess, proc, waitForProcess )
+
+run :: FilePath -> [String] -> FilePath -> IO ()
+run prog as a = do
+  (_, _, _, pHandle) <- createProcess $ proc prog $ a:as
+  void $ waitForProcess pHandle
+
+mapRun :: FilePath -> FilePath-> [String] -> IO ()
+mapRun dir prog tailArgs = do
+  fs <- fmap (fmap (dir </>)) (listDirectory dir)
+  mapM_ (run prog tailArgs) fs
+
+showUsage :: IO ()
+showUsage = do
+  progName <- getProgName
+  putStrLn $ "Usage: " ++ progName ++ " <dir> <prog> [<prog-args>]"
+
+main :: IO ()
+main = do
+  args <- getArgs
+  case args of
+    (dir:prog:tailArgs) ->
+      mapRun dir prog tailArgs
+    _ ->
+      showUsage >> exitFailure
