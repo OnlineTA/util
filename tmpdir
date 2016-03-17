@@ -19,7 +19,7 @@ def do_with_tmpdir(args, tmpdir):
 
   if args.copy:
     if os.path.isfile(args.copy):
-      shutil.copy(args.copy, tmpdir)
+      shutil.copy2(args.copy, tmpdir)
     else:
       copytree(args.copy, tmpdir)
 
