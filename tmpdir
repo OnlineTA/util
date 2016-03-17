@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
-# This one is written in Python because in principle, this could be a
+# Do something with temporary directory.
+#
+# For documentation, try this:
+# $ ./tmpdir --help
+#
+# This util is written in Python because, in principle, this could be a
 # cross-platform util. This remains to be tested.
 
 import argparse, os, os.path, shutil, subprocess, sys, tempfile
