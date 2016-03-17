@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+import os.path, tempfile
+
+import pexpect
+
+dir = tempfile.gettempdir()
+prefix = tempfile.gettempprefix()
+pathprefix = os.path.join(dir, prefix)
+
+child = pexpect.spawn("../src/tmpdir sh")
+child.sendline("pwd")
+child.expect(pathprefix + ".*", timeout = 1)
+child.sendline("exit")
+child.expect(pexpect.EOF, timeout = 1)
