@@ -28,7 +28,7 @@ def do_with_tmpdir(args, tmpdir):
   had_tmpdir = False
   for i, arg in enumerate(args.args):
     if arg == "%%TMPDIR":
-      args.args[i] = "\"" + tmpdir + "\""
+      args.args[i] = tmpdir
       had_tmpdir = True
 
   if (args.cwd or not had_tmpdir) and not args.keepwd:
