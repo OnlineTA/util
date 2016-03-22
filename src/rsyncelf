@@ -3,7 +3,7 @@
 set -euo pipefail
 
 if [ $# -ne 1 ]; then
-  echo "Usage: $0 <absolute-path-to-elf-executable>"
+  echo "Usage: $0 <absolute-path-to-elf-file>"
   exit 1
 fi
 
