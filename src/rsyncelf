@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <absolute-path-to-elf-executable>"
+  exit 1
+fi
+
+set -x
+
+function rsyncelf () {
+  PATHNAME=$1
+
+  LIBS=($(readelf -a "$PATHNAME" | grep "Shared library" | \
+            perl -pe 's/.*Shared library: \[(.*)\].*/\1/' || true))
+
+  if [ ${#LIBS[@]} -ne 0 ]; then
+    for LIB in "${LIBS[@]}"; do
+      rsyncelf "/lib64/$LIB"
+    done
+  fi
+
+  rsync --update --copy-links "$PATHNAME" "rootfs$PATHNAME"
+}
+
+rsyncelf $1
