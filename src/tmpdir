@@ -7,6 +7,11 @@
 #
 # This util is written in Python because, in principle, this could be a
 # cross-platform util. This remains to be tested.
+#
+# Author: Oleks <oleks@oleks.info>
+#
+# This is an OnlineTA utility. For more utilities, see
+# https://github.com/OnlineTA/.
 
 import argparse, os, os.path, shutil, subprocess, sys, tempfile
 

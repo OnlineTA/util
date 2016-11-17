@@ -8,4 +8,6 @@ python:
   - "nightly" # currently points to 3.6-dev
 # command to install dependencies
 install: "pip install -r test/requirements.txt"
+env:
+- PATH="$TRAVIS_BUILD_DIR/src:$PATH"
 script: make test
